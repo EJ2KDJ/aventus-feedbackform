@@ -1,0 +1,144 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+body,
+main {
+    display: flex;
+    
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: antiquewhite;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+}
+
+/* div box to align form box*/
+#feedback-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* form styling */
+#container-form {
+    gap: 1rem;
+    color: white;
+    text-align: center;
+    width: 25%;
+    padding: 20px;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    border-radius: 5px;
+    box-shadow: 8px 8px 8px rgb(176, 176, 176);
+    background-color: #33ac68;
+}
+
+p {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 0;
+}
+
+
+/* INPUTS */
+input {
+    margin-top: 20px;
+    height: 25px;
+}
+
+input[type="text"] {
+    display: block;
+    padding: 20px 8px;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    font-size: 1.2rem;
+    width: 70%;
+    background-color: #ecfbfb;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    margin: 20px auto 0;
+}
+
+input[type="text"]:focus {
+    border-color: #006e30;
+    background-color: #ffffff;
+    outline: none;
+}
+
+
+/* STAR REVIEW */
+.star-rating {
+    direction: rtl;
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    gap: 0.25rem;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    color: lightgray;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.star-rating label:hover,
+.star-rating label:hover~label {
+    color: gold;
+}
+
+.star-rating input:checked~label {
+    color: gold;
+}
+
+
+/* MESSAGE BOX */
+#message {
+    display: block;
+    padding: 8px;
+    resize: none;
+    border-radius: 2px;
+    border: 2px solid transparent;
+    font-size: 1.2rem;
+    height: 8rem;
+    width: 70%;
+    background-color: #ecfbfb;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    margin-bottom: 35px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#message:focus {
+    border-color: #006e30;
+    background-color: #ffffff;
+    outline: none;
+}
+
+button {
+    margin: 0 auto;
+    display: block;
+    font-size: 1.2rem;
+    border: none;
+    width: 70%;
+    padding: 20px;
+    border-radius: 2px;
+    background-color: white;
+    color: #33ac68;
+    cursor: pointer;
+}

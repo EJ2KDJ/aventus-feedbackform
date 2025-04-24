@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <div id="feedback-form">
+        <form action="" id="container-form">
+            <h1>FEEDBACK FORM</h1>
+
+            <!-- Input fields -->
+            <input type="text" name="name" id="name" placeholder="Name" required>
+
+            <input type="text" name="email" id="email" placeholder="Email">
+
+            <input type="text" name="num" id="num" placeholder="Contact">    
+
+            <!-- Star rating -->
+            <p>Rate our services</p>
+            <div class="star-rating">
+                <input type="radio" name="rating" id="star5" value="5">
+                <label for="star5" title="5 stars">&#9733;</label>
+
+                <input type="radio" name="rating" id="star4" value="4">
+                <label for="star4" title="4 stars">&#9733;</label>
+
+                <input type="radio" name="rating" id="star3" value="3">
+                <label for="star3" title="3 stars">&#9733;</label>
+
+                <input type="radio" name="rating" id="star2" value="2">
+                <label for="star2" title="2 stars">&#9733;</label>
+
+                <input type="radio" name="rating" id="star1" value="1">
+                <label for="star1" title="1 star">&#9733;</label>
+            </div>
+
+            <textarea name="text-area" id="message" wrap="soft" placeholder="Your Feedback..."></textarea>
+            
+            <button type="submit">Submit</button> 
+        </form>
+    </div>
+</body>
+
+</html>
