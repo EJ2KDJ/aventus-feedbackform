@@ -1,0 +1,22 @@
+{
+  "name": "aventus-feedbackform",
+  "version": "1.0.0",
+  "description": "",
+  "main": "form.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EJ2KDJ/aventus-feedbackform.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EJ2KDJ/aventus-feedbackform/issues"
+  },
+  "homepage": "https://github.com/EJ2KDJ/aventus-feedbackform#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
