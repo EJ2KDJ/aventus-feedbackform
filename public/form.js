@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const rating = document.querySelector('input[name="rating"]:checked')?.value;
         const message = document.getElementById('message').value.trim();
 
-        if (!name || !email || !contact || !rating || !message) {
-            alert('Please fill in all the fields.');
+        if (!name || !email || !rating || !message) {
+            alert('Please fill in all required fields.');
             return;
         } 
 
