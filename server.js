@@ -6,7 +6,8 @@ const app = express();
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use('cors');
+app.use(cors());
+app.use(express.static('public'));
 
 app.post('/submit-feedback',
     [
@@ -34,18 +35,18 @@ app.post('/submit-feedback',
             .isInt({ min: 1, max: 5}).withMessage('Invalid rating'),
         
         /* Message box sanitization */
-        body('text-area')
+        body('message')
             .trim()
             .escape()
     ],
     async (req, res) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()) {
-            return res.status(400).json({ errors: err.array() });
+            return res.status(400).json({ errors: errors.array() });
         }
 
         try {
-            const {name, email, num, rating, 'text-area': message} = req.body;
+            const {name, email, num, rating, message} = req.body;
             
             await pool.query(
                 'INSERT INTO feedback_logs (name, email, phone, rating, message) VALUES ($1, $2, $3, $4, $5)', [name, email, num, rating, message]
