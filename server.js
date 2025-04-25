@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static('public'));
 
-app.post('/submit-feedback',
+app.post('/api/feedback',
     [
         /* Name sanitization */
         body('name')
