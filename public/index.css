@@ -19,6 +19,7 @@ main {
 h1 {
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 
 /* div box to align form box*/
@@ -48,6 +49,7 @@ p {
     font-weight: bold;
     margin-top: 25px;
     margin-bottom: 0;
+    user-select: none;
 }
 
 
@@ -141,4 +143,9 @@ button {
     background-color: white;
     color: #33ac68;
     cursor: pointer;
+    transition: background-color 1s ease;
+}
+
+button:hover {
+    background-color: #ecfbfb;
 }
