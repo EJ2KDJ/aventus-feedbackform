@@ -15,10 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         } 
 
-        const feedback = {name, email, contact, rating, message};
+        const feedback = {name, email, num, rating, message};
 
         try {
-            const res = await fetch('/api/feedback', {
+            const res = await fetch('/submit-feedback', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

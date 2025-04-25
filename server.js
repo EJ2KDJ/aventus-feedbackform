@@ -24,7 +24,7 @@ app.post('/submit-feedback',
             .isEmail().withMessage('Invalid email'),
 
         /* Tel no. sanitization */
-        body('num')
+        body('contact')
             .trim()
             .escape()
             .isLength({ min: 10, max: 10}).withMessage('Invalid phone number')
@@ -46,10 +46,11 @@ app.post('/submit-feedback',
         }
 
         try {
-            const {name, email, num, rating, message} = req.body;
+            const {name, email, contact, rating, message} = req.body;
             
             await pool.query(
-                'INSERT INTO feedback_logs (name, email, phone, rating, message) VALUES ($1, $2, $3, $4, $5)', [name, email, num, rating, message]
+                'INSERT INTO feedback_logs (name, email, contact, rating, message) VALUES ($1, $2, $3, $4, $5)', 
+                [name, email, contact, rating, message]
             );
 
             res.send('Feedback submitted succesfully!');
