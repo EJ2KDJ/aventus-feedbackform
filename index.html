@@ -10,19 +10,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 </head>
-<script src="form.js"></script>
 <body>
 
     <div id="feedback-form">
-        <form action="" id="container-form">
+        <form action="/submit-feedback" method="POST" id="container-form">
             <h1>FEEDBACK FORM</h1>
 
             <!-- Input fields -->
-            <input type="text" name="name" id="name" placeholder="Name" required>
-
-            <input type="text" name="email" id="email" placeholder="Email">
-
-            <input type="text" name="num" id="num" placeholder="Contact">    
+            <input type="text" name="name" id="name" placeholder="Name" >
+            <input type="email" name="email" id="email" placeholder="Email" >
+            <input type="tel" name="num" id="num" placeholder="Contact" pattern="[0-9]{10}" >    
 
             <!-- Star rating -->
             <p>Rate our services</p>
@@ -39,15 +36,16 @@
                 <input type="radio" name="rating" id="star2" value="2">
                 <label for="star2" title="2 stars">&#9733;</label>
 
-                <input type="radio" name="rating" id="star1" value="1">
+                <input type="radio" name="rating" id="star1" value="1" required>
                 <label for="star1" title="1 star">&#9733;</label>
             </div>
 
-            <textarea name="text-area" id="message" wrap="soft" placeholder="Your Feedback..."></textarea>
+            <textarea name="text-area" id="message" wrap="soft" placeholder="Your Feedback..." required></textarea>
             
             <button type="submit">Submit</button> 
         </form>
     </div>
+    <script src="form.js"></script>
 </body>
 
 </html>

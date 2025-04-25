@@ -57,7 +57,7 @@ input {
     height: 25px;
 }
 
-input[type="text"] {
+input[type="text"], input[type="email"], input[type="tel"] {
     display: block;
     padding: 20px 8px;
     border: 2px solid transparent;
