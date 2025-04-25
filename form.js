@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
-        const contact = document.getElementById('num').value.trim();
+        const contact = document.getElementById('contact').value.trim();
         const rating = document.getElementById('input[name="rating"]:checked')?.value;
         const message = document.getElementById('message').value.trim();
 
