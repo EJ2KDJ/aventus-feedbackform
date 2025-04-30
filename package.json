@@ -18,6 +18,7 @@
   "homepage": "https://github.com/EJ2KDJ/aventus-feedbackform#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "pg": "^8.15.5"

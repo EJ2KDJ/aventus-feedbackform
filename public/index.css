@@ -138,7 +138,6 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus {
     color: gold;
 }
 
-
 /* MESSAGE BOX */
 #message {
     display: block;

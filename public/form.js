@@ -1,106 +1,75 @@
+'use strict';
+
 console.log('form.js loaded');
 
 document.addEventListener('DOMContentLoaded', () => {
+    const secretKey = 'a9884abbdc81065904aefab2b487124b8c9f971fb95610612e824c6cb4257023';
     const form = document.getElementById('container-form');
-    
-    // Show status message function
-    function showStatus(message, isError = false) {
-        const statusDiv = document.createElement('div');
-        statusDiv.className = 'status-message';
-        statusDiv.textContent = message;
-        statusDiv.style.padding = '10px';
-        statusDiv.style.marginTop = '15px';
-        statusDiv.style.borderRadius = '4px';
-        statusDiv.style.textAlign = 'center';
-        
-        if (isError) {
-            statusDiv.style.backgroundColor = '#ffebee';
-            statusDiv.style.color = '#c62828';
-        } else {
-            statusDiv.style.backgroundColor = '#e8f5e9';
-            statusDiv.style.color = '#2e7d32';
-        }
-        
-        // Remove any existing status message
-        const existingStatus = document.querySelector('.status-message');
-        if (existingStatus) {
-            existingStatus.remove();
-        }
-        
-        form.appendChild(statusDiv);
-        
-        // Auto-remove success messages after 5 seconds
-        if (!isError) {
-            setTimeout(() => {
-                statusDiv.remove();
-            }, 5000);
-        }
-    }
+    const submitButton = form.querySelector('button[type="submit"]');
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         console.log('Form submitted');
 
+        // Get and trim input values
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
         const contact = document.getElementById('contact').value.trim();
         const rating = document.querySelector('input[name="rating"]:checked')?.value;
         const message = document.getElementById('message').value.trim();
 
-        if (!name || !email || !rating || !message) {
-            showStatus('Please fill in all required fields.', true);
+        // Simple frontend validation (matches backend)
+        if (name.length < 2 || name.length > 50 ||
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
+            (contact && !/^\d{10}$/.test(contact)) ||
+            !rating || message.length < 5 || message.length > 500) {
+            console.warn('Client-side validation failed.');
             return;
-        } 
+        }
 
-        const feedback = {name, email, contact, rating, message};
-        console.log('Sending feedback data:', feedback);
+        const encryptedName = CryptoJS.AES.encrypt(name, secretKey).toString();
+        const encryptedEmail = CryptoJS.AES.encrypt(email, secretKey).toString();
+        const encryptedContact = CryptoJS.AES.encrypt(contact, secretKey).toString();
+        const encryptedRating = CryptoJS.AES.encrypt(rating, secretKey).toString();
+        const encryptedMessage = CryptoJS.AES.encrypt(message, secretKey).toString();
+    
+        const feedback = {
+            name: encryptedName,
+            email: encryptedEmail,
+            contact: encryptedContact,
+            rating: encryptedRating,
+            message: encryptedMessage
+        };
+
+        console.log('Sending feedback:', feedback);
 
         try {
-            // Show loading indicator
-            const submitButton = form.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.textContent;
+            // Disable button during submission
             submitButton.disabled = true;
             submitButton.textContent = 'Submitting...';
-            
-            // Make the request with full URL to avoid confusion
-            const fullUrl = window.location.origin + '/api/feedback';
-            console.log('Submitting to:', fullUrl);
-            
-            const res = await fetch(fullUrl, {
+
+            const res = await fetch('/api/feedback', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(feedback),
             });
-            
-            console.log('Response status:', res.status);
-            
-            // Handle response
-            if (res.ok) {
-                const data = await res.json();
-                console.log('Success response:', data);
-                showStatus(data.message || 'Feedback submitted successfully!');
+
+            const data = await res.json();
+            if (res.ok && data.success) {
+                console.log('Feedback sent successfully');
                 form.reset();
             } else {
-                const errorData = await res.json().catch(() => null);
-                console.error('Error response:', errorData);
-                if (errorData && errorData.errors) {
-                    // Format validation errors
-                    const errorMessages = errorData.errors.map(err => err.msg).join(', ');
-                    showStatus(`Validation error: ${errorMessages}`, true);
-                } else {
-                    showStatus('Server error. Please try again later.', true);
-                }
+                console.error('Validation/server error:', data);
             }
+
         } catch (error) {
-            console.error('Fetch error:', error);
-            showStatus('Failed to submit feedback. Network error or server unavailable.', true);
+            console.error('Network or server error:', error);
         } finally {
             // Re-enable submit button
-            const submitButton = form.querySelector('button[type="submit"]');
             submitButton.disabled = false;
-            submitButton.textContent = originalButtonText;
+            submitButton.textContent = 'Submit';
         }
     });
 });
