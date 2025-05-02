@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+    <div class="login-container">
+        <h1>Admin Login</h1>
+        <form id="login-form">
+          <input type="password" id="password" placeholder="Enter Admin Password" required />
+          <button type="submit">Login</button>
+        </form>
+      </div>
+
+  <script>
+    const form = document.getElementById('login-form');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const password = document.getElementById('password').value;
+
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.token) {
+        localStorage.setItem('admin-token', data.token);
+        window.location.href = '/admin.html';
+      } else {
+        alert('Invalid password.');
+      }
+    });
+  </script>
+</body>
+</html>
