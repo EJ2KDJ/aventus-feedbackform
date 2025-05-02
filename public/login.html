@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Admin Login</title>
   <link rel="stylesheet" href="admin.css" />
 </head>
+
 <body>
-    <div class="login-container">
-        <h1>Admin Login</h1>
-        <form id="login-form">
-          <input type="password" id="password" placeholder="Enter Admin Password" required />
-          <button type="submit">Login</button>
-        </form>
-      </div>
+  <div class="login-container">
+    <h1>Admin Login</h1>
+    <form id="login-form">
+      <input type="password" id="password" placeholder="Enter Admin Password" required />
+      <button type="submit">Login</button>
+    </form>
+  </div>
 
   <script>
     const form = document.getElementById('login-form');
@@ -30,7 +32,10 @@
       const data = await res.json();
 
       if (res.ok && data.token) {
-        localStorage.setItem('admin-token', data.token);
+        sessionStorage.setItem('admin-token', JSON.stringify({
+          token: data.token,
+          expires: data.expires
+        }));
         window.location.href = '/admin.html';
       } else {
         alert('Invalid password.');
@@ -38,4 +43,5 @@
     });
   </script>
 </body>
+
 </html>
